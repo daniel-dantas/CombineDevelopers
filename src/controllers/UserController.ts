@@ -10,6 +10,7 @@ class UserController {
     const userResponse: UserType = await GithubAPI.searchUser(github_username) as UserType
   
     if(userResponse){
+
       await User.create({
         login: userResponse.login,
         avatar_url: userResponse.avatar_url,
@@ -17,10 +18,11 @@ class UserController {
       } as UserType).then((user) => {
         return res.send(user)
       }).catch( err => {
-        return res.send({status: 'failed'})
+        return res.status(404).send({status: 'User already registered'})
       })
+      
     }else{
-      return res.send({status: 'github not found'})
+      return res.status(404).send({status: 'github not found'})
     }
   }
 

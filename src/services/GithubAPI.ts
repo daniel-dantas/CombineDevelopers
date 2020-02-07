@@ -1,4 +1,4 @@
-import API from '../config/APIConfig'
+import API from './config/APIConfig'
 import { UserType, RepositoriesType } from '../models/User'
 
 class GithubAPI{

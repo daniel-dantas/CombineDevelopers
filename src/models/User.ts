@@ -1,14 +1,14 @@
 import { Schema, model, Document } from 'mongoose'
 
 interface RepositoriesType{
-  language?: string,
-  name?: string
+  language: string,
+  name: string
 }
 
 interface UserType extends Document{
-  avatar_url ?: string,
-  login ?: string,
-  repositories?: [RepositoriesType]
+  avatar_url : string,
+  login : string,
+  repositories: [RepositoriesType]
 }
 
 const UserSchema = new Schema({

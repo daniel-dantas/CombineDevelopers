@@ -1,11 +1,23 @@
-import express, { Request, Response } from 'express'
+import express, { Request, Response, Express, json } from 'express'
+import Mongoose from 'mongoose'
+import Routes from './routes'
+import Cors from 'cors'
 
-const app = express()
+const app: Express = express()
 
-const PORT = 8000
+const PORT: number = 8000
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to my life typescript')
+app.use(Cors())
+app.use(json())
+app.use('/',Routes)
+// Connect MongoDB
+Mongoose.connect('mongodb://localhost/combinedevelopers', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log(`MongoDB server is open!`)
+}).catch( err => {
+  console.log(`Erro: ${err}`)
 })
 
 app.listen(PORT, () => {

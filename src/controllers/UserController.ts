@@ -14,6 +14,8 @@ class UserController {
       await User.create({
         login: userResponse.login,
         avatar_url: userResponse.avatar_url,
+        blog: userResponse.blog,
+        bio: userResponse.bio,
         repositories: userResponse.repositories
       } as UserType).then((user) => {
         return res.status(200).send(user)
@@ -53,6 +55,8 @@ class UserController {
       await User.updateOne({login: github_username}, {
         login: user.login,
         avatar_url: user.avatar_url,
+        blog: user.blog,
+        bio: user.bio,
         repositories: user.repositories
       } as UserType).then(response => {
 

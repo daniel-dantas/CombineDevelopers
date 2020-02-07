@@ -8,17 +8,24 @@ interface RepositoriesType{
 interface UserType extends Document{
   avatar_url : string,
   login : string,
+  blog: string,
+  bio: string,
   repositories: [RepositoriesType]
 }
 
 const UserSchema = new Schema({
   avatar_url: {
     type: String,
-    required: true,
   },
   login: {
     type: String,
     required: true,
+  },
+  blog: {
+    type: String
+  },
+  bio: {
+    type: String
   },
   repositories: [
     {
@@ -26,7 +33,8 @@ const UserSchema = new Schema({
         type: String,
       },
       name: {
-        type: String
+        type: String,
+        required: true
       }
     }
   ]

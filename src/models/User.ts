@@ -10,7 +10,7 @@ interface UserType extends Document{
   login : string,
   blog: string,
   bio: string,
-  repositories: [RepositoriesType]
+  repositories: RepositoriesType[]
 }
 
 const UserSchema = new Schema({

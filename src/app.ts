@@ -7,9 +7,6 @@ const app: Express = express()
 
 const PORT: number = 8000
 
-app.use(Cors())
-app.use(json())
-app.use('/',Routes)
 // Connect MongoDB
 Mongoose.connect('mongodb://localhost/combinedevelopers', {
   useNewUrlParser: true,
@@ -19,6 +16,11 @@ Mongoose.connect('mongodb://localhost/combinedevelopers', {
 }).catch( err => {
   console.log(`Erro: ${err}`)
 })
+
+app.use(Cors())
+app.use(json())
+app.use('/api/v1',Routes)
+
 
 app.listen(PORT, () => {
   console.log(`Server is open in port ${PORT}`)

@@ -7,5 +7,6 @@ routes.post('/users', User.create)
 routes.get('/users', User.read)
 routes.delete('/users', User.delete)
 routes.put('/users', User.update)
+routes.get('/users/:github_username', User.search)
 
 export default routes

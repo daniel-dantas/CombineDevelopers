@@ -11,13 +11,7 @@ class UserController {
   
     if(userResponse){
 
-      await User.create({
-        login: userResponse.login,
-        avatar_url: userResponse.avatar_url,
-        blog: userResponse.blog,
-        bio: userResponse.bio,
-        repositories: userResponse.repositories
-      } as UserType).then((user) => {
+      await User.create(userResponse).then((user) => {
         return res.status(200).send(user)
       }).catch( err => {
         return res.status(404).send({message: 'User already registered'})
@@ -52,13 +46,7 @@ class UserController {
     const user: UserType = await GithubAPI.searchUser(github_username) as UserType
 
     if(user){
-      await User.updateOne({login: github_username}, {
-        login: user.login,
-        avatar_url: user.avatar_url,
-        blog: user.blog,
-        bio: user.bio,
-        repositories: user.repositories
-      } as UserType).then(response => {
+      await User.updateOne({login: github_username}, user).then(response => {
 
         if(response.n){
           return res.status(200).send({message: 'updated user'})
@@ -73,6 +61,35 @@ class UserController {
       return res.status(404).send({message: 'github not found'})
     }
 
+
+  }
+
+  static search = async (req: Request, res: Response) => {
+
+    const { github_username } = req.params
+
+    await User.findOne({login: github_username}).then(async (user) => {
+      
+      if(user){
+        return res.status(200).send(user)
+      }
+      
+      const userResponse: UserType =  await GithubAPI.searchUser(github_username) as UserType
+      
+      if(userResponse){
+        return res.status(200).send({
+          message: 'not registered in the database, data directly from github',
+          response: {
+            user: userResponse
+          } 
+        })
+      }else{
+        return res.status(404).send({message: 'github not found'})
+      }
+
+      
+
+    })
 
   }
 

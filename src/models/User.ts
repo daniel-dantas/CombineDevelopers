@@ -1,6 +1,6 @@
 import { Schema, model, Document } from 'mongoose'
 
-interface RepositoriesType{
+interface RepositorieType{
   language: string,
   name: string
 }
@@ -10,7 +10,8 @@ interface UserType extends Document{
   login : string,
   blog: string,
   bio: string,
-  repositories: RepositoriesType[]
+  mainLanguage: string,
+  repositories: RepositorieType[]
 }
 
 const UserSchema = new Schema({
@@ -22,6 +23,9 @@ const UserSchema = new Schema({
     required: true,
   },
   blog: {
+    type: String
+  },
+  maingLanguage: {
     type: String
   },
   bio: {
@@ -43,5 +47,5 @@ const UserSchema = new Schema({
 export default model('User', UserSchema)
 export {
   UserType,
-  RepositoriesType
+  RepositorieType
 }

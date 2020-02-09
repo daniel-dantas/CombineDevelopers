@@ -6,11 +6,11 @@ interface RepositorieType{
 }
 
 interface UserType extends Document{
-  avatar_url : string,
-  login : string,
-  blog: string,
-  bio: string,
-  mainLanguage: string,
+  avatar_url?: string,
+  login: string,
+  blog?: string,
+  bio?: string,
+  mainLanguages?: string[],
   repositories: RepositorieType[]
 }
 
@@ -25,8 +25,8 @@ const UserSchema = new Schema({
   blog: {
     type: String
   },
-  maingLanguage: {
-    type: String
+  mainLanguages: {
+    type: [String]
   },
   bio: {
     type: String

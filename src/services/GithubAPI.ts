@@ -1,5 +1,6 @@
 import API from './config/APIConfig'
 import { UserType, RepositorieType } from '../models/User'
+import SelectLanguagesStack from '../utils/SelectLanguagesStack'
 
 class GithubAPI{
   static searchUser = async (github_username: string) => {
@@ -10,18 +11,21 @@ class GithubAPI{
         return response.data as RepositorieType[]
       })
       
-      let repositories: RepositorieType[] = user.repositories.map(repositor => {
+      let repositories: RepositorieType[] = user.repositories.map((repositor):RepositorieType => {
         return {
           name: repositor.name,
           language: repositor.language
-        } as RepositorieType
+        }
       })
+
+      const mainLanguages: string[] = SelectLanguagesStack(repositories)
 
       return {
         login: user.login,
         avatar_url: user.avatar_url,
         bio: user.bio,
         blog: user.blog,
+        mainLanguages,
         repositories
       } as UserType
       

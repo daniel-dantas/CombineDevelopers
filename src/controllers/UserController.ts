@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import GithubAPI from '../services/GithubAPI'
 import User, {UserType} from '../models/User'
-import SelectMainLanguage from '../utils/SelectMainLanguage'
 
 class UserController {
   static create = async(req: Request, res: Response) => {
@@ -11,9 +10,6 @@ class UserController {
     const userResponse: UserType = await GithubAPI.searchUser(github_username) as UserType
   
     if(userResponse){
-
-      userResponse.mainLanguage = SelectMainLanguage(userResponse.repositories)
-
       await User.create(userResponse).then((user) => {
         return res.status(200).send(user)
       }).catch( err => {
@@ -26,7 +22,17 @@ class UserController {
   }
 
   static read = async(req: Request, res: Response) => {
-    const users: UserType[] = await User.find() as UserType[]
+    let users: UserType[] = await User.find() as UserType[]
+
+    users = users.map((user)=> {
+      return {
+        login: user.login,
+        avatar_url: user.avatar_url,
+        blog: user.blog,
+        bio: user.bio,
+        mainLanguages: user.mainLanguages,
+      } as UserType
+    })
 
     return res.status(200).send(users)
 
@@ -49,8 +55,6 @@ class UserController {
     const user: UserType = await GithubAPI.searchUser(github_username) as UserType
 
     if(user){
-
-      user.mainLanguage = SelectMainLanguage(user.repositories)
 
       await User.updateOne({login: github_username}, user).then(response => {
 

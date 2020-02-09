@@ -1,4 +1,4 @@
-import express, { Request, Response, Express, json } from 'express'
+import express, { Express, json } from 'express'
 import Mongoose from 'mongoose'
 import Routes from './routes'
 import Cors from 'cors'

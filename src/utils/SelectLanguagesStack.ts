@@ -6,6 +6,10 @@ export default function SelectLanguagesStack(repositories: RepositorieType[]){
   let languagesStack: string[] = []
   let language: string
 
+  repositories = repositories.filter(repositor => {
+    return repositor.language !== null
+  })
+
   let languages: string[] = repositories.map(repositorie => {
     return repositorie.language
   })

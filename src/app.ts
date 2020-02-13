@@ -2,7 +2,7 @@ import express, { Express, json } from 'express'
 import Mongoose from 'mongoose'
 import Routes from './routes'
 import Cors from 'cors'
-// OIIIIIIIIIII
+
 const app: Express = express()
 
 const PORT: number = 8000

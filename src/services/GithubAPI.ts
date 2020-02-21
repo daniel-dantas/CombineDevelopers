@@ -1,11 +1,11 @@
 import API from './config/APIConfig'
-import { UserType, RepositorieType } from '../models/User'
+import { DevType, RepositorieType } from '../models/Dev'
 import SelectLanguagesStack from '../utils/SelectLanguagesStack'
 
 class GithubAPI{
   static searchUser = async (github_username: string) => {
-    return await API.get(`${github_username}`).then(async(response):Promise<UserType> => {
-      let user = response.data as UserType
+    return await API.get(`${github_username}`).then(async(response):Promise<DevType> => {
+      let user = response.data as DevType
   
       user.repositories = await API.get(`${github_username}/repos`).then((response):RepositorieType[] => {
         return response.data as RepositorieType[]
@@ -27,7 +27,7 @@ class GithubAPI{
         blog: user.blog,
         mainLanguages,
         repositories
-      } as UserType
+      } as DevType
       
     }).catch( err => {
       return false

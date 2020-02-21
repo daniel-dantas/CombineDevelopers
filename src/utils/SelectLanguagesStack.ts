@@ -1,4 +1,4 @@
-import { RepositorieType } from '../models/User'
+import { RepositorieType } from '../models/Dev'
 import { modeFast } from 'simple-statistics'
 
 export default function SelectLanguagesStack(repositories: RepositorieType[]){

@@ -1,11 +1,11 @@
 import { Schema, model, Document } from 'mongoose'
-import { UserType } from './User'
+import { DevType } from './Dev'
 
 interface GroupDevType extends Document{
   nameProject: string,
   languagesStack: string[],
   description: string,
-  devs?: UserType[]
+  devs?: DevType[]
 }
 
 const groupSchema = new Schema({

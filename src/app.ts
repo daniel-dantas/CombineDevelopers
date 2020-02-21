@@ -22,6 +22,7 @@ app.use(json())
 app.use('/api/v1',Routes)
 
 
-app.listen(PORT, () => {
-  console.log(`Server is open in port ${PORT}`)
-})
+export default app
+export {
+  PORT
+}

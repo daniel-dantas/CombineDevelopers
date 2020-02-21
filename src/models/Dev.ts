@@ -5,7 +5,7 @@ interface RepositorieType{
   name: string
 }
 
-interface UserType extends Document{
+interface DevType extends Document{
   avatar_url?: string,
   login: string,
   blog?: string,
@@ -46,6 +46,6 @@ const UserSchema = new Schema({
 
 export default model('User', UserSchema)
 export {
-  UserType,
+  DevType,
   RepositorieType
 }

@@ -14,7 +14,7 @@ interface DevType extends Document{
   repositories: RepositorieType[]
 }
 
-const UserSchema = new Schema({
+const DevSchema = new Schema({
   avatar_url: {
     type: String,
   },
@@ -44,7 +44,7 @@ const UserSchema = new Schema({
   ]
 })
 
-export default model('User', UserSchema)
+export default model('Dev', DevSchema)
 export {
   DevType,
   RepositorieType
